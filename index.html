@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>МаруЮ : Обратный адрес поиск</title>
+    <meta name="description" content="Поиск скрытый адрес Японии в тексте.">
+    <meta name="author" content="（´・ω・） сцрипт">
+    <meta property="og:title" content="МаруЮ : Обратный адрес поиск">
+    <meta property="og:description" content="Поиск скрытый адрес Японии в тексте.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://maruju.miko.im/">
+    <link rel="shortcut icon" href="./favicon.png">
+    <link href="./css/bootstrap.min.css?1411477236" rel="stylesheet">
+</head>
+
+<body>
+<div class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">МаруЮ</a>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+            <h2>Поиск скрытый адрес в тексте</h2>
+            <div class="form-group has-feedback">
+                <label class="control-label" for="inputSearch">Введите текст</label>
+                <input type="text" class="form-control input-lg" id="inputSearch" placeholder="佐.+市$">
+                <span class="glyphicon glyphicon-search form-control-feedback"></span>
+            </div>
+            <p><small>Поделитесь текст, мы научим вас скрытый адрес. Эта форма может только найти адрес <b>Японии</b>.</small></p>
+        </div>
+    </div>
+
+    <div class="row" style="padding-top: 20px">
+        <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+            <div class="table-responsive">
+                <table class="table table-condensed table-hover table-striped">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>JIS X 0402</th>
+                        <th>Адрес</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tableResult">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+        <footer>
+            <p class="text-muted">（´・ω・） сцрипт / Я заинтересован в безопасности и компьютерных сетей, моим главным является информатика.</p>
+        </footer>
+    </div>
+</div>
+
+<script src="./js/jquery-1.11.1.min.js?1411477236"></script>
+<script src="./js/jsrender.min.js?1411477236"></script>
+<script src="./js/bootstrap.min.js?1411477236"></script>
+<script id="tmplResult" type="text/x-jsrender">
+{{for}}
+<tr>
+    <td>{{:id}}</td>
+    <td>{{:code}}</td>
+    <td>{{:address}}</td>
+</tr>
+{{/for}}
+</script>
+<script>$(function(){var b,c=$("#inputSearch"),f=RegExp(),g=$.templates("#tmplResult");$.ajax({type:"GET",url:"data.json",dataType:"json",success:function(a){b=a},error:function(a,b,d){c.attr("disabled","disabled");c.attr("placeholder",b+" / "+d)}});c.bind("keyup",function(){a:{var a=$("#inputSearch").val();if(""!=a){try{f.compile(a)}catch(h){c.parent().addClass("has-error");break a}c.parent().removeClass("has-error");for(var a=[],d=0;d<b.length;d++){var e=b[d];e.address.match(f)&&(e.id=a.length+1,a.push(e))}$("#tableResult").html(g.render(a))}}})});</script>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</body>
+</html>
